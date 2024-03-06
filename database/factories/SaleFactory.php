@@ -16,6 +16,7 @@ class SaleFactory extends Factory
      */
     public function definition(): array
     {
+        // TODO poderia adicionar uma forma de receber uma lista de produtos para que a Sale fosse criada já com o registro de lista de produtos
         return [
             'sales_id' => fake()->unique()->regexify('[0-9]{9}'),
             'total_price' => fake()->randomFloat(2)
