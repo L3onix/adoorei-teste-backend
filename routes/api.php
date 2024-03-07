@@ -20,7 +20,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 // lista de produtos disponiveis
-Route::get('/product', [ProductController::class, 'index']);
+Route::get('/products', [ProductController::class, 'index'])->name('products.index');
 // cadastrar nova venda
 Route::post('/sale', function (Request $request) {
     return response();
