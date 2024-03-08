@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('sales', function (Blueprint $table) {
             $table->id();
             $table->string('sales_id')->unique();
-            $table->float('total_price');
+            $table->float('total_price')->default(0);
             $table->timestamps();
         });
         Schema::create('product_sale', function (Blueprint $table) {
