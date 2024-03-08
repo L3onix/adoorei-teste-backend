@@ -141,7 +141,7 @@ class SaleTest extends TestCase
         $responseJson = '{
             "data": {
                 "sales_id": "202301011",
-                "amount": 8200,
+                "amount": 29400,
                 "products": [
                     {
                         "id": 1,

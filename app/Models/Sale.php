@@ -36,10 +36,8 @@ class Sale extends Model
     public function refreshTotalPrice(): void
     {
         $totalPrice = 0;
-        foreach($this->products as $product) {
-            $totalPrice += (
-                $product->price * $product->pivot->amount
-            );
+        foreach($this->products()->get() as $product) {
+            $totalPrice += ( $product->price * $product->pivot->amount);
         }
         $this->total_price = $totalPrice;
         $this->save();
