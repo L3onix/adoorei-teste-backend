@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SaleAddProductsRequest;
 use App\Http\Requests\SaleRequest;
 use App\Http\Resources\SaleResource;
 use App\Models\Sale;
@@ -32,6 +33,7 @@ class SaleController extends Controller
 
         $sale = Sale::create(['sales_id' => $saleId]);
         $sale->addProductsToSale($products);
+        $sale->refresh();
 
         return new SaleResource($sale);
     }
@@ -53,9 +55,14 @@ class SaleController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(SaleAddProductsRequest $request, string $id)
     {
-        //
+        $products = $request->validated();
+        $sale = Sale::with('products')->find($id);
+        $sale->addProductsToSale($products);
+        $sale->refresh();
+
+        return new SaleResource($sale);
     }
 
     public function destroy(string $id)
