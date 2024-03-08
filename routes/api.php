@@ -31,6 +31,4 @@ Route::get('/sales/{id}', [SaleController::class, 'show'])->name('sales.show');
 // cancelar uma venda
 Route::delete('/sales/{id}', [SaleController::class, 'destroy'])->name('sales.destroy');
 // cadastrar produtos a uma venda
-Route::put('/sale/{id}', function (Request $request) {
-    return response();
-});
+Route::put('/sales/{id}', [SaleController::class, 'update'])->name('sales.update');
