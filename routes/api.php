@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\SaleController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -22,9 +23,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 // lista de produtos disponiveis
 Route::get('/products', [ProductController::class, 'index'])->name('products.index');
 // cadastrar nova venda
-Route::post('/sale', function (Request $request) {
-    return response();
-});
+Route::post('/sales', [SaleController::class, 'store'])->name('sales.store');
 // consultar vendas realizadas
 Route::get('/sale', function (Request $request) {
     return response();
