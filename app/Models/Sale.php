@@ -21,8 +21,14 @@ class Sale extends Model
 
     public function addProductsToSale(array $products): void
     {
-        foreach($products as $product) {
-            $this->products()->save(Product::find($product['id']), ['amount' => $product['amount']]);
+        foreach($products as $key => $product) {
+            if ($this->products->contains('id', $product['id'])) {
+                $productModel = $this->products->firstWhere('id', $product['id']);
+                $newAmount = $productModel->pivot->amount + $product['amount'];
+                $this->products()->updateExistingPivot($product['id'], ['amount' => $newAmount]);
+            } else {
+                $this->products()->save(Product::find($product['id']), ['amount' => $product['amount']]);
+            }
         }
         $this->refreshTotalPrice();
     }
