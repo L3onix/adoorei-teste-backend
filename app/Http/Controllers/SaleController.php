@@ -35,12 +35,10 @@ class SaleController extends Controller
         return new SaleResource($sale);
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(string $id)
     {
-        //
+        $sale = Sale::with('products')->find($id);
+        return new SaleResource($sale);
     }
 
     /**
