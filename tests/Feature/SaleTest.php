@@ -111,4 +111,14 @@ class SaleTest extends TestCase
         $response->assertStatus(200)
             ->assertExactJson(json_decode($json, true));
     }
+
+    public function test_sale_delete_endpoint_with_id(): void
+    {
+        $json = '{
+            "message": "Venda excluída com sucesso"
+        }';
+        $response = $this->deleteJson(route('sales.destroy', ['id' => 1]));
+        $response->assertStatus(200)
+            ->assertExactJson(json_decode($json, true));
+    }
 }
