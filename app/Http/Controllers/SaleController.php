@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SaleRequest;
+use App\Http\Resources\SaleResource;
+use App\Models\Sale;
 use Illuminate\Http\Request;
 
 class SaleController extends Controller
@@ -22,12 +25,16 @@ class SaleController extends Controller
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function store(SaleRequest $request)
     {
-        //
+        $validated = $request->validated();
+        $saleId = $validated['sales_id'];
+        $products = $validated['products'];
+
+        $sale = Sale::create(['sales_id' => $saleId]);
+        $sale->addProductsToSale($products);
+
+        return new SaleResource($sale);
     }
 
     /**
