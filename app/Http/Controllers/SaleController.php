@@ -9,12 +9,10 @@ use Illuminate\Http\Request;
 
 class SaleController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $sales = Sale::with('products')->get();
+        return SaleResource::collection($sales);
     }
 
     /**
