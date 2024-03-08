@@ -25,9 +25,7 @@ Route::get('/products', [ProductController::class, 'index'])->name('products.ind
 // cadastrar nova venda
 Route::post('/sales', [SaleController::class, 'store'])->name('sales.store');
 // consultar vendas realizadas
-Route::get('/sale', function (Request $request) {
-    return response();
-});
+Route::get('/sales', [SaleController::class, 'index'])->name('sales.index');
 // consultar uma venda específica
 Route::get('/sale/{id}', function (Request $request) {
     return response();
