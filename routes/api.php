@@ -27,9 +27,7 @@ Route::post('/sales', [SaleController::class, 'store'])->name('sales.store');
 // consultar vendas realizadas
 Route::get('/sales', [SaleController::class, 'index'])->name('sales.index');
 // consultar uma venda específica
-Route::get('/sale/{id}', function (Request $request) {
-    return response();
-});
+Route::get('/sales/{id}', [SaleController::class, 'show'])->name('sales.show');
 // cancelar uma venda
 Route::delete('/sale/{id}', function (Request $request) {
     return response();
