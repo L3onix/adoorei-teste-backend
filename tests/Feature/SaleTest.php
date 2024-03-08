@@ -121,4 +121,51 @@ class SaleTest extends TestCase
         $response->assertStatus(200)
             ->assertExactJson(json_decode($json, true));
     }
+
+    public function test_sale_put_endpoint_with_id(): void
+    {
+        $requestJson = '[
+            {
+                "id": 1,
+                "amount": 1
+            },
+            {
+                "id": 2,
+                "amount": 3
+            },
+            {
+                "id": 3,
+                "amount": 1
+            }
+        ]';
+        $responseJson = '{
+            "data": {
+                "sales_id": "202301011",
+                "amount": 8200,
+                "products": [
+                    {
+                        "id": 1,
+                        "name": "Celular 1",
+                        "price": 1800,
+                        "amount": 2
+                    },
+                    {
+                        "id": 2,
+                        "name": "Celular 2",
+                        "price": 3200,
+                        "amount": 5
+                    },
+                    {
+                        "id": 3,
+                        "name": "Celular 3",
+                        "price": 9800,
+                        "amount": 1
+                    }
+                ]
+            }
+        }';
+        $response = $this->putJson(route('sales.destroy', ['id' => 1]), json_decode($requestJson, true));
+        $response->assertStatus(200)
+            ->assertExactJson(json_decode($responseJson, true));
+    }
 }
