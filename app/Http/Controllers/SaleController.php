@@ -6,6 +6,7 @@ use App\Http\Requests\SaleRequest;
 use App\Http\Resources\SaleResource;
 use App\Models\Sale;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class SaleController extends Controller
 {
@@ -57,11 +58,12 @@ class SaleController extends Controller
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
-        //
+        $sale = Sale::findOrFail($id);
+        $sale->products()->detach();
+        $sale->delete();
+
+        return response()->json(['message' => 'Venda excluída com sucesso'], Response::HTTP_OK);
     }
 }
